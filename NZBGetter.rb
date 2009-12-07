@@ -1,14 +1,23 @@
 #!/usr/bin/env ruby
+# =NZBGetter
 # NZBGetter takes a list of search-terms from the command line.
 # It then downloads every NZB found for this search-term.
 #
 # There are two options:
-# * -f -- the file in which the ids for the downloaded nzbs are stored, so no nzb is downloaded twice
-# * -d -- the directory in which the downloaded nzbs are stored
+# [-c] the configuration-file in YAML-format (default: <tt>NZBGetter.yml</tt>)
+# [-d] the directory in which the downloaded nzbs are stored (default: current directory)
+# [-f] the file in which the ids for the downloaded nzbs are stored, so no nzb is downloaded twice (default: <tt>.downloaded</tt>)
+#
+# ==The Configuration-File
+# This is a example configuration-file:
+#  search_terms:
+#    - search term 1
+#    - search term 2
 #
 # Author::	Zoran Zaric (mailto:zz@zoranzaric.de)
-# v0.1 - 06.12.2009
+# v0.2 - 07.12.2009
 
+require 'rubygems'
 require 'rss/1.0'
 require 'rss/2.0'
 require 'open-uri'
@@ -18,12 +27,17 @@ class NZBGetter
   def initialize
     @downloaded_file = ".downloaded"
     @download_dir    = ""
+    @config_file     = "NZBGetter.yml"
     @search_terms = Array.new
     skip_next = false
     ARGV.each_with_index do |arg, index|
       if skip_next
         skip_next = false
 	next
+      end
+      if arg == "-c"
+        @config_file = ARGV[index + 1]
+	skip_next = true
       end
       if arg == "-d"
         @download_dir = ARGV[index + 1]
@@ -40,6 +54,7 @@ class NZBGetter
         @search_terms.push(arg)
       end
     end
+    parse_config
   end
 
   # parses the file with the already downloaded ids
@@ -47,6 +62,17 @@ class NZBGetter
     if File.exists?(@downloaded_file)
       File.foreach(@downloaded_file) do |line|
         @downloaded.push(line.to_i)
+      end
+    end
+  end
+
+  # parses the configuration file
+  def parse_config
+    if File.exists?(@config_file)
+      config = YAML.load_file(@config_file)
+      config['search_terms'].each do |search_term|
+        @search_terms.push(search_term)
+	puts "pushed " + search_term
       end
     end
   end
