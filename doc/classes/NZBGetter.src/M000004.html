@@ -5,14 +5,14 @@
 
 <html>
 <head>
-  <title>get_id (NZBGetter)</title>
+  <title>get_rss_url (NZBGetter)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File NZBGetter.rb, line 60</span>
-  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_id</span>(<span class="ruby-identifier">item</span>)
-    <span class="ruby-regexp re">/(\d+)$/</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">item</span>.<span class="ruby-identifier">link</span>)[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_i</span>
+  <pre><span class="ruby-comment cmt"># File NZBGetter.rb, line 81</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_rss_url</span>(<span class="ruby-identifier">search_term</span>)
+    <span class="ruby-value str">&quot;http://www.nzbclub.com/nzbfeed.aspx?ss=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-constant">CGI</span><span class="ruby-operator">::</span><span class="ruby-identifier">escape</span>(<span class="ruby-identifier">search_term</span>)
   <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>

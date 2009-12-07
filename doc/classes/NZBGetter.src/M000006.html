@@ -5,16 +5,14 @@
 
 <html>
 <head>
-  <title>get_nzb_filename (NZBGetter)</title>
+  <title>get_nzb_url (NZBGetter)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File NZBGetter.rb, line 70</span>
-  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_nzb_filename</span>(<span class="ruby-identifier">item</span>)
-    <span class="ruby-identifier">item</span>.<span class="ruby-identifier">title</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/\W/</span>, <span class="ruby-value str">'_'</span>)
-    <span class="ruby-identifier">item</span>.<span class="ruby-identifier">title</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/^_*/</span>, <span class="ruby-value str">''</span>)
-    <span class="ruby-identifier">item</span>.<span class="ruby-identifier">title</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/_*$/</span>, <span class="ruby-value str">''</span>) <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.nzb&quot;</span>
+  <pre><span class="ruby-comment cmt"># File NZBGetter.rb, line 91</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_nzb_url</span>(<span class="ruby-identifier">item</span>)
+    <span class="ruby-value str">&quot;http://www.nzbclub.com/nzbdownload.aspx?cid=&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">get_id</span>(<span class="ruby-identifier">item</span>).<span class="ruby-identifier">to_s</span>
   <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>

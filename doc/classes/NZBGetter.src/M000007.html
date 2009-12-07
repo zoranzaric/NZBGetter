@@ -5,26 +5,16 @@
 
 <html>
 <head>
-  <title>download_nzb (NZBGetter)</title>
+  <title>get_nzb_filename (NZBGetter)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File NZBGetter.rb, line 77</span>
-  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">download_nzb</span>(<span class="ruby-identifier">item</span>)
-    <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@downloaded</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">get_id</span>(<span class="ruby-identifier">item</span>))
-      <span class="ruby-identifier">filename</span> = <span class="ruby-identifier">get_nzb_filename</span>(<span class="ruby-identifier">item</span>)
-      <span class="ruby-identifier">url</span> = <span class="ruby-identifier">get_nzb_url</span>(<span class="ruby-identifier">item</span>)
-      <span class="ruby-identifier">writeOut</span> = <span class="ruby-identifier">open</span>(<span class="ruby-ivar">@download_dir</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">filename</span>, <span class="ruby-value str">&quot;wb&quot;</span>)
-      <span class="ruby-identifier">writeOut</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">open</span>(<span class="ruby-identifier">url</span>).<span class="ruby-identifier">read</span>)
-      <span class="ruby-identifier">writeOut</span>.<span class="ruby-identifier">close</span>
-      <span class="ruby-identifier">downloaded_file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@downloaded_file</span>, <span class="ruby-value str">&quot;a+&quot;</span>)
-      <span class="ruby-identifier">downloaded_file</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-identifier">get_id</span>(<span class="ruby-identifier">item</span>))
-      <span class="ruby-identifier">downloaded_file</span>.<span class="ruby-identifier">close</span>
-      <span class="ruby-ivar">@downloaded</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">get_id</span>(<span class="ruby-identifier">item</span>))
-    <span class="ruby-keyword kw">else</span>
-      <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;didn't download&quot;</span>
-    <span class="ruby-keyword kw">end</span>
+  <pre><span class="ruby-comment cmt"># File NZBGetter.rb, line 96</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_nzb_filename</span>(<span class="ruby-identifier">item</span>)
+    <span class="ruby-identifier">item</span>.<span class="ruby-identifier">title</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/\W/</span>, <span class="ruby-value str">'_'</span>)
+    <span class="ruby-identifier">item</span>.<span class="ruby-identifier">title</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/^_*/</span>, <span class="ruby-value str">''</span>)
+    <span class="ruby-identifier">item</span>.<span class="ruby-identifier">title</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/_*$/</span>, <span class="ruby-value str">''</span>) <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;.nzb&quot;</span>
   <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>

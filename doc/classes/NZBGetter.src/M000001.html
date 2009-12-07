@@ -10,16 +10,21 @@
   <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File NZBGetter.rb, line 18</span>
+  <pre><span class="ruby-comment cmt"># File NZBGetter.rb, line 27</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
     <span class="ruby-ivar">@downloaded_file</span> = <span class="ruby-value str">&quot;.downloaded&quot;</span>
     <span class="ruby-ivar">@download_dir</span>    = <span class="ruby-value str">&quot;&quot;</span>
+    <span class="ruby-ivar">@config_file</span>     = <span class="ruby-value str">&quot;NZBGetter.yml&quot;</span>
     <span class="ruby-ivar">@search_terms</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
     <span class="ruby-identifier">skip_next</span> = <span class="ruby-keyword kw">false</span>
     <span class="ruby-constant">ARGV</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">arg</span>, <span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">skip_next</span>
         <span class="ruby-identifier">skip_next</span> = <span class="ruby-keyword kw">false</span>
         <span class="ruby-keyword kw">next</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">arg</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;-c&quot;</span>
+        <span class="ruby-ivar">@config_file</span> = <span class="ruby-constant">ARGV</span>[<span class="ruby-identifier">index</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>]
+        <span class="ruby-identifier">skip_next</span> = <span class="ruby-keyword kw">true</span>
       <span class="ruby-keyword kw">end</span>
       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">arg</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;-d&quot;</span>
         <span class="ruby-ivar">@download_dir</span> = <span class="ruby-constant">ARGV</span>[<span class="ruby-identifier">index</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>]
@@ -36,6 +41,7 @@
         <span class="ruby-ivar">@search_terms</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">arg</span>)
       <span class="ruby-keyword kw">end</span>
     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-identifier">parse_config</span>
   <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>

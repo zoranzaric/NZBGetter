@@ -56,7 +56,7 @@
     </tr>
     <tr class="top-aligned-row">
       <td><strong>Last Update:</strong></td>
-      <td>Mon Dec 07 00:54:12 +0100 2009</td>
+      <td>Mon Dec 07 15:43:16 +0100 2009</td>
     </tr>
     </table>
   </div>
@@ -69,7 +69,8 @@
   <div id="contextContent">
 
     <div id="description">
-      <p>
+      <h1><a href="../classes/NZBGetter.html">NZBGetter</a></h1>
+<p>
 <a href="../classes/NZBGetter.html">NZBGetter</a> takes a list of
 search-terms from the command line. It then downloads every NZB found for
 this search-term.
@@ -77,15 +78,28 @@ this search-term.
 <p>
 There are two options:
 </p>
-<ul>
-<li>-f &#8212; the file in which the ids for the downloaded nzbs are stored, so
-no nzb is downloaded twice
+<dl>
+<dt>-c</dt><dd>the configuration-file in YAML-format (default: <tt>NZBGetter.yml</tt>)
 
-</li>
-<li>-d &#8212; the directory in which the downloaded nzbs are stored
+</dd>
+<dt>-d</dt><dd>the directory in which the downloaded nzbs are stored (default: current
+directory)
 
-</li>
-</ul>
+</dd>
+<dt>-f</dt><dd>the file in which the ids for the downloaded nzbs are stored, so no nzb is
+downloaded twice (default: <tt>.downloaded</tt>)
+
+</dd>
+</dl>
+<h2>The Configuration-File</h2>
+<p>
+This is a example configuration-file:
+</p>
+<pre>
+ search_terms:
+   - search term 1
+   - search term 2
+</pre>
 <table>
 <tr><td valign="top">Author:</td><td>Zoran Zaric (<a href="mailto:zz@zoranzaric.de">zz@zoranzaric.de</a>)
 
@@ -101,6 +115,7 @@ v0.1 - 06.12.2009
       <h3 class="section-bar">Required files</h3>
 
       <div class="name-list">
+      rubygems&nbsp;&nbsp;
       rss/1.0&nbsp;&nbsp;
       rss/2.0&nbsp;&nbsp;
       open-uri&nbsp;&nbsp;
